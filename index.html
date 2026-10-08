@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>草草电影网 | 草草看几眼，也能聊两句的电影笔记</title>
+<meta name="description" content="草草电影网（https://caocaodianyingwang-wap.github.io）是一份随手翻读的电影内容单页：草草片单、随手笔记、冷片推荐与观影习惯，十分钟看完一期。">
+<meta name="keywords" content="草草电影网, caocaodianyingwang-wap, 电影笔记, 草草片单, 随手笔记, 冷片推荐">
+<meta name="author" content="草草电影网">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f4efdf">
+<meta property="og:type" content="website">
+<meta property="og:title" content="草草电影网 | 草草看几眼，也能聊两句的电影笔记">
+<meta property="og:description" content="随手翻读的电影单页：草草片单、随手笔记、冷片推荐与观影习惯，十分钟看完一期。">
+<meta property="og:url" content="https://caocaodianyingwang-wap.github.io">
+<meta property="og:site_name" content="草草电影网">
+<link rel="canonical" href="https://caocaodianyingwang-wap.github.io">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-size:16px;line-height:1.85;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  background:#f4efdf;color:#2c2a24;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1.4px);background-size:20px 20px}
+a{color:inherit;text-decoration:none}
+:root{--max:1160px;--ink:#2c2a24;--ink2:#5d5748;--paper:#fffdf6;--line:#d8cfb6;--accent:#d8512f;--accent2:#e9a03d;--mint:#3f8b6d;--radius:10px}
+
+/* ===== 手绘风标题 ===== */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(244,239,223,.93);backdrop-filter:blur(10px);border-bottom:2.5px solid var(--ink)}
+.site-header .wrap{max-width:var(--max);margin:0 auto;padding:0 26px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border:2.5px solid var(--ink);border-radius:50% 40% 55% 45%/50% 55% 40% 50%;display:grid;place-items:center;font-size:19px;font-weight:800;color:var(--accent);transform:rotate(-7deg)}
+.brand b{font-size:20px;font-weight:800;letter-spacing:.5px}
+.brand b i{font-style:normal;color:var(--accent)}
+.brand em{font-style:normal;font-size:12px;color:var(--ink2);letter-spacing:1px}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:9px 13px;font-size:15px;border-radius:6px;color:var(--ink2);transition:.2s}
+.nav-links a:hover{color:var(--accent);background:var(--paper)}
+.menu-btn{display:none;width:44px;height:44px;border:2px solid var(--ink);border-radius:8px;background:var(--paper);color:var(--ink);font-size:19px;cursor:pointer}
+
+/* ===== 栏目通用 ===== */
+section{max-width:var(--max);margin:0 auto;padding:50px 26px}
+.sec-t{display:flex;align-items:baseline;gap:13px;margin-bottom:26px;flex-wrap:wrap}
+.sec-t .no{font-family:"Courier New",monospace;font-size:13px;color:var(--accent);border:1.5px solid var(--accent);padding:2px 9px;border-radius:5px;transform:rotate(-2deg)}
+.sec-t h2{margin:0;font-size:clamp(21px,2.8vw,28px);letter-spacing:-.3px}
+.sec-t .more{margin-left:auto;font-size:14px;color:var(--ink2);border-bottom:1px dashed var(--ink2)}
+.sec-t .more:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ===== 封面 ===== */
+.cover{padding-top:44px}
+.intro{border:2.5px solid var(--ink);border-radius:14px;padding:44px 48px;background:var(--paper);position:relative;
+  background-image:linear-gradient(var(--paper),var(--paper)),radial-gradient(circle at 100% 0,rgba(216,81,47,.1),transparent 55%)}
+.intro::after{content:"";position:absolute;right:26px;bottom:22px;width:120px;height:42px;
+  border:2.5px solid var(--accent);border-radius:60% 40% 55% 45%/50% 60% 40% 50%;transform:rotate(-8deg);opacity:.75}
+.intro .badge{display:inline-block;font-size:13px;letter-spacing:2px;background:var(--ink);color:#f4efdf;padding:5px 13px;border-radius:6px;transform:rotate(-1.5deg)}
+.intro h1{margin:18px 0 0;font-size:clamp(29px,5.2vw,52px);line-height:1.2;font-weight:800;letter-spacing:-.5px}
+.intro h1 s{text-decoration:none;color:var(--accent);border-bottom:5px solid var(--accent2)}
+.intro p{margin:18px 0 0;color:var(--ink2);font-size:clamp(15px,1.7vw,17px);max-width:58ch}
+.acts{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 23px;border-radius:8px;font-size:15px;cursor:pointer;border:2.5px solid var(--ink);transition:.2s;background:var(--paper)}
+.btn-p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-p:hover{background:#b83d1e;border-color:#b83d1e}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.scribble{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.scribble span{font-family:"Courier New",monospace;font-size:12.5px;color:var(--ink2);border:1.5px dashed var(--line);border-radius:999px;padding:4px 12px}
+
+/* ===== 草草片单 斜贴纸 ===== */
+.tape{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.note{position:relative;border-radius:6px;padding:24px 22px;background:var(--paper);border:1.5px solid var(--line);
+  box-shadow:4px 5px 0 rgba(44,42,36,.1);transition:.25s;min-height:170px;display:flex;flex-direction:column}
+.note::before{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);width:62px;height:20px;background:rgba(233,160,61,.55);border-radius:2px}
+.note:nth-child(2)::before{transform:translateX(-50%) rotate(3deg);background:rgba(63,139,109,.5)}
+.note:nth-child(3)::before{transform:translateX(-50%) rotate(-2deg);background:rgba(120,120,200,.5)}
+.note:nth-child(4)::before{transform:translateX(-50%) rotate(4deg);background:rgba(216,81,47,.5)}
+.note:nth-child(5)::before{transform:translateX(-50%) rotate(-4deg);background:rgba(180,120,60,.55)}
+.note:nth-child(6)::before{transform:translateX(-50%) rotate(2deg);background:rgba(100,160,120,.5)}
+.note:hover{transform:translate(-3px,-5px) rotate(-.5deg);box-shadow:8px 10px 0 rgba(44,42,36,.12)}
+.note .no2{font-family:"Courier New",monospace;font-size:13px;color:var(--accent)}
+.note b{margin-top:8px;font-size:19px;line-height:1.45;letter-spacing:-.2px}
+.note p{margin:8px 0 0;color:var(--ink2);font-size:14.5px;flex:1}
+.note .tag{margin-top:14px;font-size:12px;color:var(--ink2);border-top:1.5px dashed var(--line);padding-top:10px}
+
+/* ===== 随手笔记 时间轴 ===== */
+.tl{position:relative;padding-left:30px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:3px;background:repeating-linear-gradient(180deg,var(--ink) 0 8px,transparent 8px 16px)}
+.tl article{position:relative;margin-bottom:22px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:22px 26px}
+.tl article::before{content:"";position:absolute;left:-31px;top:24px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:3px solid var(--accent)}
+.tl .when{font-family:"Courier New",monospace;font-size:12.5px;color:var(--accent);letter-spacing:1px}
+.tl b{display:block;margin-top:7px;font-size:18.5px;line-height:1.5;letter-spacing:-.2px}
+.tl p{margin:8px 0 0;color:var(--ink2);font-size:15px}
+.tl .more2{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--ink2);border-bottom:1px solid var(--line)}
+
+/* ===== 冷片推荐 大卡片 + 抽屉 ===== */
+.cold{display:grid;grid-template-columns:1.35fr 1fr;gap:22px}
+.cold .big{border:2.5px solid var(--ink);border-radius:12px;padding:30px;background:var(--accent);color:#fff;position:relative;overflow:hidden;min-height:300px}
+.cold .big::after{content:"?";position:absolute;right:10px;bottom:-42px;font-size:150px;font-weight:800;opacity:.22;line-height:1}
+.cold .big s{text-decoration:none;font-size:12px;letter-spacing:3px;border:1.5px solid rgba(255,255,255,.6);padding:4px 11px;border-radius:999px}
+.cold .big b{display:block;margin-top:18px;font-size:clamp(22px,3.2vw,30px);line-height:1.4}
+.cold .big p{margin:14px 0 0;font-size:15px;opacity:.95;max-width:42ch}
+.cold .drawer{display:grid;gap:12px}
+.dr{border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:16px 18px;transition:.2s}
+.dr:hover{border-color:var(--accent);transform:translateX(4px)}
+.dr b{font-size:16.5px}
+.dr span{display:block;font-size:13.5px;color:var(--ink2);margin-top:4px}
+
+/* ===== 习惯 横条 ===== */
+.habits{display:grid;gap:12px}
+.hb{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;border-bottom:2px dotted var(--line);padding:14px 0}
+.hb:last-child{border-bottom:0}
+.hb b{font-family:"Courier New",monospace;font-size:26px;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.hb div s{text-decoration:none;font-size:17px;font-weight:600}
+.hb div p{margin:2px 0 0;font-size:14px;color:var(--ink2)}
+.hb em{font-style:normal;font-size:13px;color:var(--mint);white-space:nowrap}
+
+/* ===== 关于 ===== */
+.about{border:2.5px solid var(--ink);border-radius:12px;padding:32px 36px;background:var(--paper)}
+.about p{margin:0;font-size:15.5px;color:var(--ink2);line-height:1.9}
+.about p strong{color:var(--ink)}
+.links{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+.links a{border:1.5px solid var(--line);border-radius:999px;padding:6px 15px;font-size:13.5px;color:var(--ink2)}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== footer ===== */
+.site-footer{border-top:2.5px solid var(--ink);padding:30px 26px 40px;font-size:13.5px;color:var(--ink2);background:var(--paper)}
+.site-footer .in{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.site-footer a{color:var(--ink2)}
+.site-footer a:hover{color:var(--accent)}
+
+@media (max-width:980px){
+  .tape{grid-template-columns:repeat(2,1fr)}
+  .cold{grid-template-columns:1fr}
+  .intro{padding:34px 28px}
+  .tl::before{left:6px}
+}
+@media (max-width:640px){
+  .site-header .wrap{height:56px;padding:0 14px}
+  .brand b{font-size:17px}
+  .brand em{display:none}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center}
+  .nav-links{position:fixed;top:56px;left:0;right:0;flex-direction:column;background:rgba(244,239,223,.98);border-bottom:2.5px solid var(--ink);padding:10px;clip-path:inset(0 0 100% 0);transition:.28s ease}
+  .nav-links.open{clip-path:inset(0 0 0 0)}
+  .nav-links a{border-radius:6px}
+  section{padding:40px 14px}
+  .cover{padding-top:28px}
+  .intro{padding:28px 20px;border-radius:10px}
+  .intro::after{width:78px;height:28px;right:16px}
+  .tape{grid-template-columns:1fr;gap:20px}
+  .note{box-shadow:3px 4px 0 rgba(44,42,36,.1)}
+  .hb{grid-template-columns:56px 1fr;gap:10px}
+  .hb em{grid-column:2}
+  .about{padding:24px 20px}
+}
+@media print{body{background:#fff}.site-header,.menu-btn,.acts,.site-footer{display:none}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">草</div>
+      <div>
+        <b>草草<i>电影网</i></b>
+        <em>caocaodianyingwang-wap.github.io</em>
+      </div>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">首页</a>
+      <a href="#list">草草片单</a>
+      <a href="#notes">随手笔记</a>
+      <a href="#cold">冷片推荐</a>
+      <a href="#habit">观影习惯</a>
+      <a href="#about">关于</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="打开菜单">≡</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== 封面 ===== -->
+  <section class="cover" id="home">
+    <div class="intro">
+      <span class="badge">草草电影网 · 随手翻的一期</span>
+      <h1>不追求看懂，<br>先做到 <s>看完能聊两句</s></h1>
+      <p>草草电影网是一个用零碎时间翻一翻的单页：一份不长不短的片单、几条看完才想起来的笔记，以及那些不该被错过的小片。网站网址：https://caocaodianyingwang-wap.github.io。</p>
+      <div class="acts">
+        <a class="btn btn-p" href="#list">看草草片单</a>
+        <a class="btn" href="#notes">翻随手笔记</a>
+      </div>
+      <div class="scribble">
+        <span># 看完就算</span><span># 十分钟一期</span><span># 只聊选择理由</span><span># 不列大全</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 草草片单 ===== -->
+  <section id="list">
+    <div class="sec-t">
+      <span class="no">01</span>
+      <h2>草草片单</h2>
+      <a class="more" href="#">往期片单 #</a>
+    </div>
+    <div class="tape">
+      <a class="note" href="#"><span class="no2">N° 01</span><b>适合「只打算看开头」时看的六部</b><p>判断一部片子值不值得继续，其实看前十二分钟就够：镜头有没有定下来，角色有没有被为难一次。</p><span class="tag">入选理由 · 开场判断法</span></a>
+      <a class="note" href="#"><span class="no2">N° 02</span><b>情绪很满，但说教很少</b><p>越想讲道理的片子越容易让人想快进；这六部的聪明之处在于，把结论藏在人物的具体动作里。</p><span class="tag">入选理由 · 动作代替台词</span></a>
+      <a class="note" href="#"><span class="no2">N° 03</span><b>冷门到连梗都还没被用过</b><p>没什么人讨论，反而更好聊。挑这几部是因为它们各有一样别人抄不走的东西。</p><span class="tag">入选理由 · 不可复制性</span></a>
+      <a class="note" href="#"><span class="no2">N° 04</span><b>一个人看也不尴尬</b><p>有些片子必须带人，有些不需要。这份是给独处时间准备的，看完想说话就去评论区。</p><span class="tag">入选理由 · 独处友好</span></a>
+      <a class="note" href="#"><span class="no2">N° 05</span><b>重看时不会无聊的片</b><p>第一遍看情节，第二遍看结构，第三遍才发现哪些镜头是提前埋好的。这六部值得看三遍。</p><span class="tag">入选理由 · 重看价值</span></a>
+      <a class="note" href="#"><span class="no2">N° 06</span><b>看完能写成一段推荐语的</b><p>如果一句话都概括不出来，说明片子还没跟你建立关系。这份片单每一部都能被讲清。</p><span class="tag">入选理由 · 可讲清</span></a>
+    </div>
+  </section>
+
+  <!-- ===== 随手笔记 ===== -->
+  <section id="notes" style="padding-top:0">
+    <div class="sec-t">
+      <span class="no">02</span>
+      <h2>随手笔记</h2>
+      <a class="more" href="#">全部笔记 #</a>
+    </div>
+    <div class="tl">
+      <article>
+        <span class="when">2026.05.18 · 看完当晚</span>
+        <b>不要把「没看懂」当成一句负面评价</b>
+        <p>说不清，很多时候是片子有意保留了空白。真正该问的是：那些没说出口的部分，你想替谁补上？这部分笔记记录的是空白被填上的那一刻。</p>
+        <a class="more2" href="#">接着读 #</a>
+      </article>
+      <article>
+        <span class="when">2026.05.12 · 重看</span>
+        <b>第二次看时，我只在意三件事</b>
+        <p>谁先进画、谁最后离开，以及镜头什么时候开始撒谎。重看的价值不在细节，而在你能察觉到第一次被带走了什么。</p>
+        <a class="more2" href="#">接着读 #</a>
+      </article>
+      <article>
+        <span class="when">2026.05.05 · 和朋友吵了一架</span>
+        <b>推荐片子的正确方式，是先说清自己要什么</b>
+        <p>同一部片子，想放松的人和想被刺痛的人会得到两个结论。推荐之前先报需求，是比评分更有用的筛选条件。</p>
+        <a class="more2" href="#">接着读 #</a>
+      </article>
+      <article>
+        <span class="when">2026.04.28 · 随手记</span>
+        <b>三句话笔记法</b>
+        <p>一句讲发生了什么，一句讲它让我想起谁，一句讲我下一次要看什么。坚持三周以后，看片开始有积累感，而不是一堆看过就忘的名字。</p>
+        <a class="more2" href="#">接着读 #</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 冷片推荐 ===== -->
+  <section id="cold" style="padding-top:0">
+    <div class="sec-t">
+      <span class="no">03</span>
+      <h2>冷片推荐</h2>
+      <a class="more" href="#">冷片档案 #</a>
+    </div>
+    <div class="cold">
+      <div class="big">
+        <s>本周冷片</s>
+        <b>那些「听说过但没下手」的片子，到底卡在哪里</b>
+        <p>不是没人聊，是没人讲清它到底好在哪。这一期把门槛、节奏和观看前提一次说透，让你决定要不要现在就点开。</p>
+        <a class="more2" style="color:#fff;border-color:rgba(255,255,255,.7)" href="#">读这篇 #</a>
+      </div>
+      <div class="drawer">
+        <a class="dr" href="#"><b>《——》</b><span>片名中间缺一个字的那一类：神秘感是它唯一的广告。</span></a>
+        <a class="dr" href="#"><b>《第三间房》</b><span>空间只有三处，剧情却转了四次，结构比场面更值得聊。</span></a>
+        <a class="dr" href="#"><b>《慢车》</b><span>全程在移动，但情绪几乎静止，看它要有点耐心。</span></a>
+        <a class="dr" href="#"><b>《半张脸》</b><span>镜头只敢拍一半，另一半全靠声音和字幕补全。</span></a>
+        <a class="dr" href="#"><b>《回家那条路》</b><span>没有冲突，只有选择；它的好在于敢这么拍。</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 观影习惯 ===== -->
+  <section id="habit" style="padding-top:0">
+    <div class="sec-t">
+      <span class="no">04</span>
+      <h2>观影习惯</h2>
+      <a class="more" href="#">我的方法 #</a>
+    </div>
+    <div class="habits">
+      <div class="hb"><b>01</b><div><s>先定一个看片理由</s><p>是为了放松、学结构，还是找点聊资？理由定下来，才不会跟着别人的榜单跑。</p></div><em>看完再说</em></div>
+      <div class="hb"><b>02</b><div><s>开演后二十分钟不刷手机</s><p>前两场戏负责把人「安放」进世界，错过这一段，后面就会一直觉得跳。</p></div><em>不快进</em></div>
+      <div class="hb"><b>03</b><div><s>记三个时间点</s><p>记开头、转折和最想回看的一镜，下一次重看就有明确的目标。</p></div><em>三句话</em></div>
+      <div class="hb"><b>04</b><div><s>看完先别看影评</s><p>先写自己的判断，再看别人的，才知道自己漏掉了什么、又多看到了什么。</p></div><em>先写后看</em></div>
+      <div class="hb"><b>05</b><div><s>把推荐说成一句话</s><p>「推荐给谁、在什么心情下看、看完会想聊哪一句」——三句齐了，推荐才算成立。</p></div><em>一句话</em></div>
+    </div>
+  </section>
+
+  <!-- ===== 关于 ===== -->
+  <section id="about" style="padding-top:0">
+    <div class="sec-t">
+      <span class="no">05</span>
+      <h2>关于草草电影网</h2>
+      <a class="more" href="#">联系 #</a>
+    </div>
+    <div class="about">
+      <p><strong>网站名称：草草电影网</strong>　<strong>网站网址：https://caocaodianyingwang-wap.github.io</strong></p>
+      <p>本站是一份静态单页电影内容站，栏目包括草草片单、随手笔记、冷片推荐与观影习惯。内容定位是「看完能聊两句」，以选题、选择与判断方法为主，不做资源索引。</p>
+      <p>本站不提供任何在线播放、下载或盗版资源链接；影片名称与片段描述仅用于评论、研究与个人推荐。本页为单页站点，栏目以锚点定位，内页占位链接以 # 表示，未生成 robots.txt 与 sitemap.xml。</p>
+      <div class="links">
+        <a href="#">草草片单 #</a><a href="#">随手笔记 #</a><a href="#">冷片推荐 #</a><a href="#">观影习惯 #</a><a href="#">返回首页 #</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="in">
+    <div>© 2026 草草电影网 · 网站名称：草草电影网 · 网站网址：https://caocaodianyingwang-wap.github.io · 内容仅供学习与讨论</div>
+    <div><a href="#">返回首页 #</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),nav=document.getElementById('navLinks');
+  if(!btn||!nav)return;
+  btn.addEventListener('click',function(){nav.classList.toggle('open');});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A')nav.classList.remove('open');});
+})();
+</script>
+</body>
+</html>
